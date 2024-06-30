@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import { ChangeEvent } from "react";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { closestTime, secondsTohms } from "../utils/timestampConversion";
 import { IconTrash } from "@tabler/icons-react";
 import UrlInput from "./urlInput";
+import { OnProgressProps } from "react-player/base";
 
 const Input = () => {
   const [newCaption, setNewCaption] = useState("");
@@ -13,7 +14,7 @@ const Input = () => {
   const [currentTime, setCurrentTime] = useState("00:00:00");
   const [error, setError] = useState("");
 
-  const handleCaptionInput = (e) => {
+  const handleCaptionInput = (e: ChangeEvent<HTMLInputElement>) => {
     setError("");
     setNewCaption(e.target.value);
   };
@@ -39,7 +40,7 @@ const Input = () => {
     setCaptions(captions.filter((caption) => caption.timestamp !== timestamp));
   };
 
-  const handleProgress = ({ playedSeconds }) => {
+  const handleProgress = ({ playedSeconds }: OnProgressProps) => {
     const [h, m, s] = secondsTohms(playedSeconds);
     setCurrentTime(`${h}:${m}:${s}`);
 
@@ -58,8 +59,8 @@ const Input = () => {
   return (
     <>
       <UrlInput videoURL={videoURL} setVideoURL={setVideoURL} />
-      <div className="flex justify-between">
-        <div className="border-r mr-10">
+      <div className=" flex flex-col md:flex-row justify-between">
+        <div className="border-r flex-1 pr-10 ">
           <p>Your video will be displayed here</p>
           <ReactPlayer
             url={videoURL}
@@ -71,7 +72,7 @@ const Input = () => {
           />
           <p>{currentCaption}</p>
         </div>
-        <div className="border-r flex-1 pr-10 last:end-0">
+        <div className="border-r flex-1 px-10 last:end-0">
           <header className="font-bold mt-4 ">
             {" "}
             Add caption with current timestamp

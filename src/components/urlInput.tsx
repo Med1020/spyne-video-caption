@@ -1,6 +1,11 @@
 import { ChangeEvent } from "react";
 
-const UrlInput = ({ videoURL, setVideoURL }) => {
+interface UrlInputProps {
+  videoURL: string;
+  setVideoURL: (videoURL: string) => void;
+}
+
+const UrlInput = ({ videoURL, setVideoURL }: UrlInputProps) => {
   const handleAddURL = (e: ChangeEvent<HTMLInputElement>) => {
     setVideoURL(e.target.value);
   };

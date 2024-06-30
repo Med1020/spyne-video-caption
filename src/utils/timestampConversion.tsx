@@ -6,11 +6,21 @@ export const secondsTohms = (playedSeconds: number) => {
   return hms;
 };
 
-export const closestTime = (currentTime, captionTimestamp): number => {
+export const closestTime = (
+  currentTime: string,
+  captionTimestamp: string
+): number => {
   for (let i = 0; i < 2; i++) {
-    if (captionTimestamp.split(":")[i] - currentTime.split(":")[i] !== 0) {
+    if (
+      parseInt(captionTimestamp.split(":")[i]) -
+        parseInt(currentTime.split(":")[i]) !==
+      0
+    ) {
       return -1;
     }
   }
-  return captionTimestamp.split(":")[2] - currentTime.split(":")[2];
+  return (
+    parseInt(captionTimestamp.split(":")[2]) -
+    parseInt(currentTime.split(":")[2])
+  );
 };
