@@ -30,4 +30,5 @@ Given more time, I'd love to explore how to build a custom video player that sup
 
 ### Screenshots
 
-![image](https://github.com/Med1020/spyne-video-caption/assets/94384027/edb24b4f-0f39-4840-bb14-859f459532f7)
+![image](https://github.com/Med1020/spyne-video-caption/assets/94384027/f6fbc427-96b4-46de-b7ce-90633532734f)
+
