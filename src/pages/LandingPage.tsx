@@ -3,14 +3,15 @@ import { useState } from "react";
 import ReactPlayer from "react-player";
 import { closestTime, secondsTohms } from "../utils/timestampConversion";
 import { IconTrash } from "@tabler/icons-react";
-import UrlInput from "./urlInput";
-import { OnProgressProps } from "react-player/base";
 
-const Input = () => {
+import { OnProgressProps } from "react-player/base";
+import UrlInput from "../components/urlInput";
+
+const LandingPage = () => {
   const [newCaption, setNewCaption] = useState("");
   const [currentCaption, setCurrentCaption] = useState("");
-  const [captions, setCaptions] = useState<CaptionProp[]>([]);
-  const [videoURL, setVideoURL] = useState<string>("");
+  const [captions, setCaptions] = useState<CaptionType[]>([]);
+  const [videoURL, setVideoURL] = useState({ url: "", isValidURL: true });
   const [currentTime, setCurrentTime] = useState("00:00:00");
   const [error, setError] = useState("");
 
@@ -31,10 +32,10 @@ const Input = () => {
     }
   };
 
-  const handleUpdateCaption = (timestamp: string) => {
-    captions.filter((caption) => caption.timestamp === timestamp);
-    setCaptions([...captions]);
-  };
+  //   const handleUpdateCaption = (timestamp: string) => {
+  //     captions.filter((caption) => caption.timestamp === timestamp);
+  //     setCaptions([...captions]);
+  //   };
 
   const handleDeleteCaption = (timestamp: string) => {
     setCaptions(captions.filter((caption) => caption.timestamp !== timestamp));
@@ -49,7 +50,6 @@ const Input = () => {
         closestTime(currentTime, timestamp) === 1 || timestamp === currentTime
     );
     if (match) {
-      console.log(match);
       setCurrentCaption(match.caption);
     } else {
       setCurrentCaption("");
@@ -62,15 +62,19 @@ const Input = () => {
       <div className=" flex flex-col md:flex-row justify-between">
         <div className="border-r flex-1 pr-10 ">
           <p>Your video will be displayed here</p>
-          <ReactPlayer
-            url={videoURL}
-            controls
-            width="512px"
-            height="288px"
-            className="my-6"
-            onProgress={handleProgress}
-          />
-          <p>{currentCaption}</p>
+          {videoURL.isValidURL && (
+            <div className="relative">
+              <ReactPlayer
+                url={videoURL.url}
+                controls
+                width="100%"
+                height="100%"
+                className="my-6"
+                onProgress={handleProgress}
+              />
+              <p className="absolute inline-block">Caption: {currentCaption}</p>
+            </div>
+          )}
         </div>
         <div className="border-r flex-1 px-10 last:end-0">
           <header className="font-bold mt-4 ">
@@ -95,15 +99,13 @@ const Input = () => {
         </div>
         <div className="flex-1 ml-10">
           <header className="font-bold">List of Captions</header>
+
           {captions.map(({ timestamp, caption }) => (
-            <div className="my-4 flex text-center">
-              <input
-                value={timestamp}
-                onChange={() => handleUpdateCaption(timestamp)}
-                className="p-2 rounded-md w-20"
-              />
+            <div className="my-4 flex text-center items-center">
+              <input className="p-2 rounded-md w-20" value={timestamp} />
+
               <span className="mx-4"> - </span>
-              <input value={caption} className="p-2 rounded-md md:w-full" />
+              <input className="p-2 rounded-md md:w-full" value={caption} />
               <button
                 className="mx-4"
                 onClick={() => handleDeleteCaption(timestamp)}
@@ -118,4 +120,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default LandingPage;
