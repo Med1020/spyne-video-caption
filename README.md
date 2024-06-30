@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# Add captions to videos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app allows you to add captions to videos at specific timestamp. You can then view the video and note that the caption will be displayed right below the video player.
 
-Currently, two official plugins are available:
+## Libraries used:
+- React
+- Tailwind
+- Typescript
+- ReactPlayer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Functionalities:
 
-## Expanding the ESLint configuration
+- Add url
+- Add multiple captions
+- Delete captions
+- Play/Pause video
+- Validating input url using Reg-ex
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Why I used React Player:
 
-- Configure the top-level `parserOptions` property like this:
+Ideally, I wanted to create my own player using React, useRef instead of using a npm module as that allows more flexibilty in terms of displaying the caption as an overlay on the video
+but that would have required  more time and a lot of basic utilities were readily available out-of-the-box in ReactPlayer. 
+Given more time, I'd love to explore how to build a custom video player that supports videos hosted on different platforms. Currently, only the video hosted on platforms supported by ReactPlayer will be displayed like Youtube, Facebook,Twitch, SoundCloud, Streamable, Vimeo, Wistia, Mixcloud, DailyMotion and Kaltura.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Things I'd like to add:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- I also wanted to add useContext and useReducer for handling the adding and removing of captions for better code readability and abstraction. I faced issues with implementing useReducer Hook with Typescript which is why you don't see it implemented here. I would like to tackle it.
+
+
+
+### Screenshots
+
+![image](https://github.com/Med1020/spyne-video-caption/assets/94384027/edb24b4f-0f39-4840-bb14-859f459532f7)
