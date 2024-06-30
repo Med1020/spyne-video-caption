@@ -10,9 +10,9 @@ This app allows you to add captions to videos at specific timestamp. You can the
 
 ## Functionalities:
 
-- Add url
-- Add multiple captions
-- Delete captions
+- Takes video url
+- Can add multiple captions
+- Can delete captions
 - Play/Pause video
 - Validating input url using Reg-ex
 
